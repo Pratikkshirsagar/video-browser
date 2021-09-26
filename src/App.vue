@@ -1,6 +1,7 @@
 <template>
   <div class="container">
    <SearchBar @termChange="onTermChange"></SearchBar>
+   <VideoDetail  :video="selectedVideo"/>
    <VideoList :videos="videos" @videoSelect="onVideoSelect"></VideoList>
   </div>
 </template>
@@ -9,6 +10,7 @@
 import axios from 'axios';
 import SearchBar from './components/SearchBar.vue';
 import VideoList from './components/VideoList.vue';
+import VideoDetail from './components/VideoDetail.vue';
 const API_KEY = 'API_KEY';
 
  export default {
@@ -16,9 +18,10 @@ const API_KEY = 'API_KEY';
    components: {
      SearchBar,
      VideoList,
+     VideoDetail
    },
    data(){
-     return { videos: [] }
+     return { videos: [], selectedVideo: null }
    },
    methods: {
      onTermChange(searchTerm)  {
@@ -34,7 +37,7 @@ const API_KEY = 'API_KEY';
        })
      },
      onVideoSelect(video) {
-       console.log(video);
+       this.selectedVideo = video
      }
    }
 
